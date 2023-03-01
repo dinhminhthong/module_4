@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <title>product</title>
+</head>
+
+<body>
+<div>
+    <h1>PRODUCT LIST</h1>
+    <div>
+        <form action="/products"method="get">
+            <label for="searchName">searchName</label>
+            <input type="text" id="searchName" name="searchName" placeholder="search..."/>
+            <input type="submit"/>
+        </form>
+    </div>
+    <div>
+        <a href="/products/create-form">Create</a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>PRICE</th>
+            <th>DESCRIPTION</th>
+            <th>BRAND</th>
+            <th>DELETE</th>
+            <th>EDIT</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product, pro:${products}">
+
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.description}"></td>
+            <td th:text="${product.brand}"></td>
+            <td><!-- Button trigger modal -->
+                <button type="button" th:attr="onclick=|infoDelete('${product.id}', '${product.name}')|"
+                        class="btn btn-danger" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"> DELETE
+                </button>
+            </td>
+            <td><a th:href="@{/products/{id}/edit(id=${product.id})}">EDIT</a></td>
+        </tr>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Modal -->
+<div class="modal " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form action="/products/delete" method="get">
+                <div class="modal-body">
+                    <input type="hidden"  id="id" name="id" >
+                    Bạn có muốn xóa sản phẩm <span id="name"
+                                               style="color: brown; font-weight: bold"></span>
+                    không ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
+                    <button type="submit" class="btn btn-primary">Có,Hãy Xoá</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    function infoDelete(id,name) {
+        document.getElementById("id").value = id;
+        document.getElementById("name").innerText = name;
+    }
+</script>
+</html>
