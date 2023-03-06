@@ -34,7 +34,7 @@
                     <a class="nav-link disabled">Disabled</a>
                 </li>
             </ul>
-            <form class="d-flex" role="search" action="/product/search">
+            <form class="d-flex" role="search" action="/blogs">
                 <input class="form-control me-2" type="search" name="name" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
@@ -47,6 +47,10 @@
         Add new blog
     </a></button>
 </p>
+<!--<form action="" method="get">-->
+<!--    <input type="text"name="name" placeholder="search..." th:value="freeText">-->
+<!--    <button type="submit">Search</button>-->
+<!--</form>-->
 <marquee  th:text="${mess}">
 </marquee>
 <table class="table">
@@ -69,7 +73,7 @@
         <!--        <td><a th:href="@{/product/{id}/delete(id=${product.getId()})}">delete</a></td>-->
 
         <td > <button th:attr="onclick=|infoDelete('${blog.id}','${blog.name}')|"
-                      class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Delete
         </button></td>
         <td><button  class="btn btn-primary"><a style="text-decoration: none; color: white"  th:href="@{/blog/{id}/view(id=${blog.getId()})}">view</a></button></td>
@@ -77,6 +81,21 @@
     </tr>
     </body>
 </table>
+<div style="display: flex">
+    <a class="page-item" th:if="${blogs.hasPrevious()}"
+       th:href="@{/blogs(page=${blogs.number - 1},name=${freeText})}">
+            Previous
+    </a>
+
+    <a class="page-item" th:each="p:${pages}"th:if="${p !=blogs.number}"
+       th:href="@{/blogs(page=${p},name=${freeText})}"th:text="${p+1}">
+    </a>
+
+    <a class="page-item" th:if="${blogs.hasNext()}"
+       th:href="@{/blogs(page=${blogs.number + 1},name=${freeText})}">
+        Next
+    </a>
+    </div>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

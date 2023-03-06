@@ -1,39 +1,41 @@
-package com.example.exercise_optional.model;
+package com.example.exercise_optional.dto;
 
-import javax.persistence.*;
+import com.example.exercise_optional.model.Category;
 
-@Entity
-public class Blog {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+public class BlogDto {
     private int id;
+
     private String name;
     private String author;
     private String dateCreate;
     private String content;
 
-    @ManyToOne
-    @JoinColumn(name = "blog_id" ,referencedColumnName = "id"  )
-    private com.example.exercise_optional.model.Category category;
+    private Category category;
 
-    public Blog() {
-    }
 
-    public com.example.exercise_optional.model.Category getCategory() {
+
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(com.example.exercise_optional.model.Category category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
-    public Blog(int id, String name, String author, String dateCreate, String content, Category category) {
+    public BlogDto() {
+    }
+
+    public BlogDto(int id, String name, String author, String dateCreate, String content, Category category) {
         this.id = id;
+
         this.name = name;
         this.author = author;
         this.dateCreate = dateCreate;
         this.content = content;
-      this.category = category;
+        this.category = category;
     }
 
     public int getId() {

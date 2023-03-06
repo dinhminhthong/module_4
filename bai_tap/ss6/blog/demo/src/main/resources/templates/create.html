@@ -45,7 +45,7 @@
 <button  class="btn btn-primary"><a style="text-decoration: none; color: white"  th:href="@{/}">
   Back To Blog List
 </a></button>
-<form th:action="@{/blog/save}" th:object="${blog}" method="post">
+<form th:action="@{/blogs/save}" th:object="${blog}" method="post">
   Name:
   <input type="text" th:field="*{name}"><br>
   Author:
