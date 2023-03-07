@@ -1,9 +1,10 @@
-package com.example.exercise_optional.service.impl;
+package com.example.service;
 
 
-import com.example.exercise_optional.model.Blog;
-import com.example.exercise_optional.repository.IBlogRepository;
-import com.example.exercise_optional.service.IBlogService;
+;
+import com.example.model.Blog;
+import com.example.repository.IBlogRepository;
+import com.example.service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

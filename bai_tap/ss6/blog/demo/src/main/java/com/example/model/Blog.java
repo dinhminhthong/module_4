@@ -1,4 +1,7 @@
-package com.example.exercise_optional.model;
+package com.example.model;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 
@@ -6,34 +9,28 @@ import javax.persistence.*;
 public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "blog_id")
     private int id;
     private String name;
-    private String author;
-    private String dateCreate;
+    @Column(columnDefinition = "TEXT")
     private String content;
+    private String author;
 
+    private String date;
     @ManyToOne
-    @JoinColumn(name = "blog_id" ,referencedColumnName = "id"  )
-    private com.example.exercise_optional.model.Category category;
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    private Category category;
 
     public Blog() {
     }
 
-    public com.example.exercise_optional.model.Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(com.example.exercise_optional.model.Category category) {
-        this.category = category;
-    }
-
-    public Blog(int id, String name, String author, String dateCreate, String content, Category category) {
+    public Blog(int id, String name, String content, String author, String date, Category category) {
         this.id = id;
         this.name = name;
-        this.author = author;
-        this.dateCreate = dateCreate;
         this.content = content;
-      this.category = category;
+        this.author = author;
+        this.date = date;
+        this.category = category;
     }
 
     public int getId() {
@@ -52,6 +49,14 @@ public class Blog {
         this.name = name;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public String getAuthor() {
         return author;
     }
@@ -60,19 +65,19 @@ public class Blog {
         this.author = author;
     }
 
-    public String getDateCreate() {
-        return dateCreate;
+    public String getDate() {
+        return date;
     }
 
-    public void setDateCreate(String dateCreate) {
-        this.dateCreate = dateCreate;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getContent() {
-        return content;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

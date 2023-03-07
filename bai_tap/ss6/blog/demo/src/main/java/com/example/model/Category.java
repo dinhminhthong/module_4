@@ -1,4 +1,4 @@
-package com.example.exercise_optional.model;
+package com.example.model;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -6,20 +6,19 @@ import java.util.Set;
 @Entity
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "category_id")
     private int id;
     private String name;
-    @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
-
-    Set<com.example.exercise_optional.model.Blog> blogSet;
-
-    public Category(int id, String category, Set<com.example.exercise_optional.model.Blog> blogSet) {
-        this.id = id;
-        this.name = category;
-        this.blogSet = blogSet;
-    }
+    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
+    Set<Blog> blogSet;
 
     public Category() {
+    }
+
+    public Category(int id, String name, Set<Blog> blogSet) {
+        this.id = id;
+        this.name = name;
+        this.blogSet = blogSet;
     }
 
     public int getId() {
@@ -34,15 +33,15 @@ public class Category {
         return name;
     }
 
-    public void setName(String category) {
-        this.name = category;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Set<com.example.exercise_optional.model.Blog> getBlogSet() {
+    public Set<Blog> getBlogSet() {
         return blogSet;
     }
 
-    public void setBlogSet(Set<com.example.exercise_optional.model.Blog> blogSet) {
+    public void setBlogSet(Set<Blog> blogSet) {
         this.blogSet = blogSet;
     }
 }
