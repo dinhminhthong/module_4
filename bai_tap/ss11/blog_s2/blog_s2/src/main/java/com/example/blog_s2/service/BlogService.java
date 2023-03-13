@@ -1,7 +1,7 @@
-package com.example.blog_service.service;
+package com.example.blog_s2.service;
 
-import com.example.blog_service.model.Blog;
-import com.example.blog_service.repository.IBlogRepository;
+import com.example.blog_s2.model.Blog;
+import com.example.blog_s2.reposirory.IBlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,14 +10,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class BlogService implements IBlogService{
+public class BlogService implements IBlogService {
     @Autowired
     private IBlogRepository blogRepository;
-
-    @Override
-    public Blog findById(int id) {
-        return blogRepository.findById(id);
-    }
 
     @Override
     public List<Blog> findAll() {
@@ -25,8 +20,18 @@ public class BlogService implements IBlogService{
     }
 
     @Override
+    public Blog findById(int id) {
+        return blogRepository.findById(id);
+    }
+
+    @Override
+    public Page<Blog> findByCategory(int id, Pageable pageable) {
+        return blogRepository.findByCategory(id,pageable);
+    }
+
+    @Override
     public Page<Blog> findByNameContaining(String name, Pageable pageable) {
-        return  blogRepository.findByNameContaining(name,pageable);
+        return blogRepository.findByNameContaining(name,pageable);
     }
 
     @Override
@@ -35,12 +40,12 @@ public class BlogService implements IBlogService{
     }
 
     @Override
-    public void save(Blog blog) {
-        blogRepository.save(blog);
+    public void deleteBlog(int id) {
+        blogRepository.deleteById(id);
     }
 
     @Override
-    public void deleteBlog(int id) {
-        blogRepository.deleteById(id);
+    public void save(Blog blog) {
+        blogRepository.save(blog);
     }
 }
