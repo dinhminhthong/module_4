@@ -15,7 +15,6 @@ public class Book {
 
     public Book() {
     }
-
     public Book(int id, String name, int quantity, Set<PayBook> payBookSet) {
         this.id = id;
         this.name = name;

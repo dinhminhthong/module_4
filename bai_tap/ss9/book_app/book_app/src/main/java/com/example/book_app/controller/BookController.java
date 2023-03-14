@@ -23,7 +23,7 @@ public class BookController {
 
     @GetMapping("/book")
     public String showList(@RequestParam(required = false, defaultValue = "") String nameSearch,
-                           @PageableDefault(size = 2, page = 0) Pageable pageable, Model model
+                           @PageableDefault(size = 20, page = 0) Pageable pageable, Model model
     ) {
         Page<Book> bookPage = bookService.findAll(nameSearch, pageable);
         model.addAttribute("pageBook", bookPage);
@@ -34,6 +34,10 @@ public class BookController {
         model.addAttribute("book", new Book());
         return "create";
     }
+//    @GetMapping("/book/delete")
+//    public String deleteShow(Book book,Model model){
+//        payBookService.delete();
+//    }
     @PostMapping("save")
     public String save(@ModelAttribute Book book, RedirectAttributes attributes){
         bookService.save(book);
@@ -65,9 +69,9 @@ public class BookController {
         return "redirect:/book";
     }
 
-    @PostMapping
-    @ExceptionHandler(Exception.class)
-    public String handlerExceptionCommon(){
-        return "error";
-    }
+//    @PostMapping
+//    @ExceptionHandler(Exception.class)
+//    public String handlerExceptionCommon(){
+//        return "error";
+//    }
 }

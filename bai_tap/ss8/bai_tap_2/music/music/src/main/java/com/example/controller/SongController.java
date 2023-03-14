@@ -20,7 +20,7 @@ public class SongController {
     @Autowired
     private ISongService songService;
 
-    @GetMapping("")
+    @GetMapping("/")
     public String showList(@RequestParam(required = false, defaultValue ="")String nameSearch,
                            @RequestParam(required = false, defaultValue ="")String singerSearch,
                            @RequestParam(required = false, defaultValue ="")String categorySearch,
